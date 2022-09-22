@@ -7,6 +7,7 @@ const {
   checkPhoneNum,
   logout,
   forgottPassword,
+  editUser
 } = require("../controller/controller");
 router.post("/register", register);
 router.post("/login", login);

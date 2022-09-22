@@ -8,9 +8,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function MediaCard() {
   const [user, setUser] = useState({});
+  const [open,setOpen] = useState(false)
+  const navigate = useNavigate();
   const fetchDeatails = async () => {
     const userId = JSON.parse(localStorage.getItem("user"));
     await axios
@@ -43,20 +46,24 @@ export default function MediaCard() {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {user.username}
+              {user ? user.username : null}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {user.phone}
+              {user ? user.email : null}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {user.email}
+              {user ? user.phone : null}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="large">Edit</Button>
+            <Button size="large" onClick={(e) => {
+           navigate("/editProfile")
+          }}>Edit</Button>
           </CardActions>
         </Card>
       </Box>
+      
+      
     </>
   );
 }

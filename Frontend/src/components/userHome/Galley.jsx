@@ -2,10 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import axios from "axios";
-import Profile from "../profile/profile";
-
 const Gallery = () => {
-  const [open, setOpen] = useState(true);
   const [data, setData] = useState({ img: "", i: 0 });
   const [images, setImages] = useState([]);
   const fetchImages = async () => {
@@ -24,7 +21,6 @@ const Gallery = () => {
   }, []);
 
   const viewImage = (img, i) => {
-    setOpen(false);
     setData({ img, i });
   };
   const imgAction = (action) => {
@@ -41,7 +37,6 @@ const Gallery = () => {
   };
   return (
     <>
-      {open && <Profile />}
       <Box>
         {data.img && (
           <Box

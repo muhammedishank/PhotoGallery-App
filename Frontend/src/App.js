@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Resetform from "./components/signup&login/resetForm"
 import Profile from "./components/profile/profile";
+import Editprofile from "./components/profile/editProfile"
 function App() {
   const [mode, setMode] = useState("light");
   const darkTheme = createTheme({
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/" element={<Login />} />
             <Route exact path="/resetForm" element={<Resetform />} />
+            <Route exact path="/editProfile" element={<Editprofile />} />
             <Route
               exact
               path="/userProfile"

@@ -6,35 +6,32 @@ const User = require("../model/User");
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    console.log(user);
-    return res.status(200).json(user);
+    return res.status(200).json("updated");
   } catch (err) {
     res.status(500).json(err);
   }
 });
 // Update user
-router.put("/:id", async (req, res) => {
-  if (req.body.userId === req.params.id || req.body.isAdmin) {
-    if (req.body.password) {
-      try {
-        const salt = await bycrypt.genSalt(10);
-        req.body.password = await bycrypt.hash(req.body.password, salt);
-      } catch (err) {
-        res.status(500).json(err);
+router.post("/", async (req, res) => {
+  console.log(req.body);
+  try {
+    const user = await User.findByIdAndUpdate(
+      { _id: req.body.userId },
+      {
+        $set: {
+          email: req.body.email,
+          phone: req.body.phone,
+          password: req.body.password,
+          image: req.body.image,
+        },
       }
-    }
-    try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
-        $set: req.body,
-      });
-      res.status(200).json("account updated");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  } else {
-    return res.status(403).json("u can only update ur account");
+    );
+    await user.save()
+    console.log("updated");
+    res.status(200).json("account updated");
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
-
 
 module.exports = router;

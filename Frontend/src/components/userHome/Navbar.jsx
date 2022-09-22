@@ -84,7 +84,7 @@ const Navbar = () => {
           }}
         >
           <Avatar
-            sx={{ width: 30, height: 30 }}
+            sx={{ width: 30, height: 30, cursor: "pointer" }}
             src="https://avatars.githubusercontent.com/u/102403834?v=4"
           />
           <Typography variant="span">Ishan</Typography>
@@ -106,7 +106,13 @@ const Navbar = () => {
           horizontal: "left",
         }}
       >
-        <MenuItem>Profile</MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            navigate("/userProfile");
+          }}
+        >
+          Profile
+        </MenuItem>
         <MenuItem>My account</MenuItem>
         <MenuItem onClick={onLogout}>Logout</MenuItem>
       </Menu>
